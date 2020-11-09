@@ -4,3 +4,4 @@
 cd contrib/docker
 docker-compose up -d
 echo "Site running"
+# docker-compose restart ckan
