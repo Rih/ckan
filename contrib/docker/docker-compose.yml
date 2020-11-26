@@ -40,7 +40,9 @@ services:
     volumes:
       - ckan_config:/etc/ckan
       - ckan_home:/usr/lib/ckan
+      - ../../:/usr/lib/ckan/venv/src/ckan_tracked
       - ckan_storage:/var/lib/ckan
+      - ../../infor:/etc/ckan/backup
 
   datapusher:
     container_name: datapusher

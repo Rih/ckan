@@ -14,15 +14,16 @@ cd ckanext-basiccharts
 python setup.py install
 
 # install visualize
+cd /usr/lib/ckan/venv/src/ckan/ckanext
 git clone https://github.com/keitaroinc/ckanext-visualize.git
 cd ckanext-visualize
 python setup.py install
 pip install -r requirements.txt
 
-
+# install viewhelper
+cd /usr/lib/ckan/venv/src/ckan/ckanext
 git clone https://github.com/ckan/ckanext-viewhelpers.git
 cd ckanext-viewhelpers
 python setup.py install
 
-# install uwsgi
-python -m pip install uwsgi
+

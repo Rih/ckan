@@ -11,7 +11,7 @@ git cherry-pick 15f708b08fcce85b66a518228931520579b18388
 git cherry-pick 0c15cb668a2f677fffc3138a242285f0a635a8b3
 git cherry-pick 8c595c85f0e3e45a569fddee6e78f86429a632f8
 
-# affected
+# Files affected
 # ckan/tests/legacy/test_coding_standards.py
 # ckanext/stats/blueprint.py
 # ckanext/stats/plugin.py
