@@ -5,7 +5,7 @@ set -e
 # unless linked to a container called 'db')
 : ${CKAN_SQLALCHEMY_URL:=}
 # URL for solr (required unless linked to a container called 'solr')
-: ${CKAN_SOLR_URL:=}
+: ${CKAN_SOLR_URL:="http://127.0.0.1:8983/solr"}
 # URL for redis (required unless linked to a container called 'redis')
 : ${CKAN_REDIS_URL:=}
 # URL for datapusher (required unless linked to a container called 'datapusher')

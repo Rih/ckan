@@ -24,7 +24,7 @@ server {
 #	index index.php index.html index.htm wsgi.py;
 
 	# Make site accessible from http://localhost/
-	server_name api-visualizador.sistematiza.cl admin.sistematiza.cl;
+	server_name _;
 	#add_header 'Access-Control-Allow-Origin' "$http_origin" always;
 
 	location / {
@@ -116,13 +116,6 @@ server {
 	#	deny all;
 	#}
 
-    listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/api-visualizador.sistematiza.cl/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/api-visualizador.sistematiza.cl/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
-
 }
 
 # HTTPS server
@@ -148,17 +141,3 @@ server {
 #		try_files $uri $uri/ =404;
 #	}
 #}
-
-
-server {
-    if ($host = api-visualizador.sistematiza.cl) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-
-	listen 80;
-	server_name api-visualizador.sistematiza.cl;
-    return 404; # managed by Certbot
-
-
-}

@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd contrib/docker
-docker-compose logs ckan
+docker-compose logs -f ckan
