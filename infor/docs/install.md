@@ -34,22 +34,47 @@ cd contrib/docker
 docker-compose up -d --build
 
 ## Configurar contenedor CKAN
-- Re-linkear .ini revisar si who.ini ya esta linkeado
 
+En maquina host
+- copiar .init a .ini
 
 ```
-sh bin/enter-dev-server.sh
+cd infor/setup
+cp production.init production.ini
+cp preproduction.init preproduction.ini
+```
+
+- linkear configuración de nginx en sites-enabled
+```
+cd /etc/nginx/site-enabled
+ln -s /<your_ckan_root_repository>/infor/setup/nginx/host/host_back host_back
+cp preproduction.init preproduction.ini
+```
+
+Dentro del contenedor re-linkear archivo configuracion .ini y revisar si who.ini ya esta linkeado
+
+```
+sh infor/bin/enter-dev-server.sh
 cd /etc/ckan
-ln -s /usr/lib/ckan/venv/src/ckan/ckan/config/who.ini who.ini
+ln -s /usr/lib/ckan/venv/src/ckan/ckan/config/who.ini who.ini (omitir si ya existe)
+cp production.init production.ini.bkp
 ln -sfn /etc/ckan/backup/setup/preproduction.ini production.ini
+exit
 ```
 
-Instalar plugins
-- ```chmod +x infor/bin/installs-plugin.sh```
-- ```sh infor/bin/installs-plugin.sh```
+ ### Instalar plugins
+Primero cambiar permisos de ejecución
+ ```chmod +x infor/bin/installs-plugin.sh```
+
+En el contenedor CKAN
+ ```
+sh infor/bin/enter-dev-server.sh
+sh /etc/ckan/backup/bin/installs-plugin.sh
+```
 
 reconfigurar .ini con los plugins añadidos
 
 ```ln -sfn /etc/ckan/backup/setup/production.ini production.ini```
 
-## Ejecutar script .SQL dentro de DB ```contrib/docker/datastore_init.sql```
+## Ejecutar script .SQL dentro de DB
+```contrib/docker/datastore_init.sql```
