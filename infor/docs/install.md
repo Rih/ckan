@@ -19,7 +19,7 @@ Si máquina HOST es linux:
 #### Copiar .env
 * cd ckan/contrib/docker/
 * cp .env.template .env
-
+* Editar .env SITE_URL a url pública
 #### En maquina HOST Añadir a /etc/hosts dominio
 * 127.0.0.1 ckan
 
@@ -66,15 +66,28 @@ exit
 Primero cambiar permisos de ejecución
  ```chmod +x infor/bin/installs-plugin.sh```
 
-En el contenedor CKAN
+En el contenedor CKAN entrar al environment
  ```
 sh infor/bin/enter-dev-server.sh
+source /usr/lib/ckan/venv/bin/activate
 sh /etc/ckan/backup/bin/installs-plugin.sh
 ```
 
 reconfigurar .ini con los plugins añadidos
 
-```ln -sfn /etc/ckan/backup/setup/production.ini production.ini```
+```
+cd /etc/ckan
+ln -sfn /etc/ckan/backup/setup/production.ini production.ini
+```
+
+reiniciar ckan
+
+
+## Mover configuracion nginx en Contenedor CKAN
+sh infor/bin/enter-dev-server.sh
+cp /etc/ckan/backup/setup/nginx/sites-available/guest
 
 ## Ejecutar script .SQL dentro de DB
-```contrib/docker/datastore_init.sql```
+- Entrar al esquema datastore
+- Ejecutar script
+```infor/setup/datastore_permissions.sql```

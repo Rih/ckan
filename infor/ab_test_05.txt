@@ -1,0 +1,45 @@
+ab -k -n 10000 -c 1000 -t 20 http://ckan.sistematiza.cl/
+This is ApacheBench, Version 2.3 <$Revision: 1843412 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ckan.sistematiza.cl (be patient)
+Finished 94 requests
+
+
+Server Software:        nginx/1.10.3
+Server Hostname:        ckan.sistematiza.cl
+Server Port:            80
+
+Document Path:          /
+Document Length:        13954 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   20.094 seconds
+Complete requests:      94
+Failed requests:        0
+Keep-Alive requests:    94
+Total transferred:      1340910 bytes
+HTML transferred:       1311676 bytes
+Requests per second:    4.68 [#/sec] (mean)
+Time per request:       213762.936 [ms] (mean)
+Time per request:       213.763 [ms] (mean, across all concurrent requests)
+Transfer rate:          65.17 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0  164  17.6    165     183
+Processing:   528 9866 5612.6   9597   19314
+Waiting:      385 9718 5608.6   9455   19150
+Total:        693 10031 5613.6   9760   19485
+
+Percentage of the requests served within a certain time (ms)
+  50%   9760
+  66%  13448
+  75%  15031
+  80%  15977
+  90%  17718
+  95%  18700
+  98%  19304
+  99%  19485
+ 100%  19485 (longest request)

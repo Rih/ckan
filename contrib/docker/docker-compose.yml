@@ -29,7 +29,7 @@ services:
       - CKAN_SQLALCHEMY_URL=postgresql://ckan:${POSTGRES_PASSWORD}@db/ckan
       - CKAN_DATASTORE_WRITE_URL=postgresql://ckan:${POSTGRES_PASSWORD}@db/datastore
       - CKAN_DATASTORE_READ_URL=postgresql://datastore_ro:${DATASTORE_READONLY_PASSWORD}@db/datastore
-      - CKAN_SOLR_URL=http://127.0.0.1:8983/solr/
+      - CKAN_SOLR_URL=http://solr:8983/solr/ckan
       - CKAN_REDIS_URL=redis://redis:6379/1
       - CKAN_DATAPUSHER_URL=http://datapusher:8800
       - CKAN_SITE_URL=${CKAN_SITE_URL}

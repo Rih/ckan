@@ -1,8 +1,7 @@
 #!/bin/bash
 
+# RUN in python-environment first: source /usr/lib/ckan/venv/bin/activate
 # add visualize basiccharts viewhelpers to ckan.plugins production.ini
-
-source /usr/lib/ckan/venv/bin/activate
 
 # install basic charts
 cd /usr/lib/ckan/venv/src/ckan/ckanext

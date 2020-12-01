@@ -13,7 +13,7 @@ from ckan.controllers.home import CACHE_PARAMETERS
 
 c = base.c
 request = base.request
-_ = base._
+# _ = base._
 
 
 def get_sysadmins():
