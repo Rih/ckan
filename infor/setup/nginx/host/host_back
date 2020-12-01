@@ -20,8 +20,8 @@
 server {
 	# listen [::]:80 ipv6only=on;
 
-#	root /var/www/html/visor_ifn/ifn/backend/ifn;
-#	index index.php index.html index.htm wsgi.py;
+  #	root /var/www/html/visor_ifn/ifn/backend/ifn;
+  #	index index.php index.html index.htm wsgi.py;
 
 	# Make site accessible from http://localhost/
 	server_name _;
@@ -97,11 +97,6 @@ server {
 		}
 	}
 
-	error_page 404 /404.html;
-	error_page 500 502 503 504 /50x.html;
-	location = /50x.html {
-		root /usr/share/nginx/html;
-	}
 
 	location ~ \.php$ {
 		#try_files $uri =404;
