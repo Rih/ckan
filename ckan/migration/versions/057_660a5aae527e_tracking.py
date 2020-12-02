@@ -23,6 +23,8 @@ def upgrade():
         'tracking_raw', sa.Column('user_key', sa.String(100), nullable=False),
         sa.Column('url', sa.UnicodeText, nullable=False),
         sa.Column('tracking_type', sa.String(10), nullable=False),
+        sa.Column('occupation', sa.String(50), nullable=True),
+        sa.Column('usertype', sa.String(50), nullable=True),
         sa.Column(
             'access_timestamp',
             sa.TIMESTAMP,
