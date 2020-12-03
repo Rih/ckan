@@ -18,7 +18,7 @@ import ckan.logic.schema as schema
 import ckan.model as model
 import ckan.plugins as plugins
 from ckan import authz
-from ckan.common import _, config, g, request
+from ckan.common import _, config, g, request, session
 
 log = logging.getLogger(__name__)
 
@@ -479,6 +479,8 @@ def logged_in():
 
 def logout():
     # Do any plugin logout stuff
+    session['C_CKAN_USERTYPE'] = ''
+    session['C_CKAN_GENDER'] = ''
     for item in plugins.PluginImplementations(plugins.IAuthenticator):
         item.logout()
     url = h.url_for(u'user.logged_out_page')
@@ -815,6 +817,12 @@ def followers(id):
     return base.render(u'user/followers.html', extra_vars)
 
 
+def track_user():
+    session['C_CKAN_USERTYPE'] = request.params.get('usertype')
+    session['C_CKAN_GENDER'] = request.params.get('gender')
+    return h.redirect_to(u'user.read', id='rih')
+
+
 user.add_url_rule(u'/', view_func=index, strict_slashes=False)
 user.add_url_rule(u'/me', view_func=me)
 
@@ -849,7 +857,7 @@ user.add_url_rule(
 user.add_url_rule(u'/follow/<id>', view_func=follow, methods=(u'POST', ))
 user.add_url_rule(u'/unfollow/<id>', view_func=unfollow, methods=(u'POST', ))
 user.add_url_rule(u'/followers/<id>', view_func=followers)
-
+user.add_url_rule(u'/track', view_func=track_user, methods=(u'POST', u'GET', ))
 user.add_url_rule(u'/<id>', view_func=read)
 user.add_url_rule(
     u'/<id>/api-tokens', view_func=ApiTokenView.as_view(str(u'api_tokens'))

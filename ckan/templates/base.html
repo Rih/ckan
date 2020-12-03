@@ -18,7 +18,7 @@
 
     {% block meta %}
       {{ super() }}
-      <meta name="description" value="My website description" />
+      <meta name="description" value="INFOR - CKAN" />
     {% endblock %}
 
     #}
@@ -89,7 +89,7 @@
   </head>
 
   {# Allows custom attributes to be added to the <body> tag #}
-  <body{% block bodytag %} data-site-root="{{ h.url_for('/', locale='default', qualified=true) }}" data-locale-root="{{ h.url_for('/', qualified=true) }}" {% endblock %}>
+  <body{% block bodytag %} data-site-root="{{ h.url_for('/', locale='default', qualified=true) }}" data-locale-root="{{ h.url_for('/', qualified=true) }}" data-usertype="{{ session.C_CKAN_USERTYPE }}" data-occupation="{{ session.C_CKAN_OCCUPATION }}" {% endblock %}>
 
     {#
     The page block allows you to add content to the page. Most of the time it is
@@ -117,7 +117,27 @@
       {# defined in the config.ini under "ckan.template_footer_end" #}
       {{ g.template_footer_end | safe }}
     {%- endblock %}
-
+    {% if not session.C_CKAN_ OCCUPATION or not session.C_CKAN_USERTYPE %}
+    <div style="position:relative; margin: -30% auto; width: 400px; height: 600px; background: gray; z-index: 100">
+      <div class="container">
+      <form id="user_tracker">
+        <div class="form-select form-group">
+          <label for="gender">Genero</label>
+          <select class="form-control" id="gender" name="gender">
+          </select>
+        </div>
+        <div class="form-select form-group">
+          <label for="usertype">Tipo usuario</label>
+          <select class="form-control" id="usertype" name="usertype">
+          </select>
+        </div>
+        <div class="form-select form-group">
+          <button class="btn btn-default form-control" type="submit" value="Enviar">Enviar</button>
+        </div>
+      </form>
+      </div>
+    </div>
+    {% endif %}
     {# render all assets included in scripts block and everywhere else #}
     {# make sure there are no calls to `asset` tag after this point #}
     {{ h.render_assets('style') }}

@@ -11,7 +11,7 @@ tracking_raw_table = Table('tracking_raw', meta.metadata,
         Column('user_key', types.Unicode(100), nullable=False),
         Column('url', types.UnicodeText, nullable=False),
         Column('tracking_type', types.Unicode(10), nullable=False),
-        Column('occupation', types.Unicode(50), nullable=True),
+        Column('gender', types.Unicode(50), nullable=True),
         Column('usertype', types.Unicode(50), nullable=True),
         Column('access_timestamp', types.DateTime),
     )

@@ -16,13 +16,13 @@ Si máquina HOST es linux:
 - ```sh  infor/bin/installs-host.sh ```
 
 ## Habilitar puertos
-* 80, 5432, 9000
+* 80, 5432, 9000 (opcional)
 * sudo ufw allow 80 80/tcp
 * sudo ufw allow 5432 5432/tcp
 
-## Clonar repositorio git y cambiar de rama a ifn_stats actualizada
+## Clonar repositorio git y cambiar de rama a ifn_tracking actualizada
 * git clone https://github.com/Rih/ckan.git
-* cd ckan && git checkout ifn_stats && git pull origin ifn_stats
+* IMPORTANTE: cd ckan && git checkout ifn_tracking && git pull origin ifn_tracking
 
 ## Instalar los contenedores de [CKAN](https://docs.ckan.org/en/2.9/maintaining/installing/install-from-docker-compose.html)
 #### Copiar .env

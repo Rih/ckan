@@ -89,9 +89,16 @@ class TrackingMiddleware(object):
             key = hashlib.md5(six.ensure_binary(key)).hexdigest()
             # store key/data here
             sql = '''INSERT INTO tracking_raw
-                     (user_key, url, tracking_type, usertype, occupation)
+                     (user_key, url, tracking_type, usertype, gender)
                      VALUES (%s, %s, %s, %s, %s)'''
-            self.engine.execute(sql, key, data.get('url'), data.get('type'), '1', '2')
+            self.engine.execute(
+                sql,
+                key,
+                data.get('url'),
+                data.get('type'),
+                data.get('usertype'),
+                data.get('gender')
+            )
             return []
         return self.app(environ, start_response)
 
