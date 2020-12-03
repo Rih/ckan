@@ -94,7 +94,7 @@ $(function (){
             usertype: $('body').data('usertype'),
             gender: $('body').data('gender'),
           },
-          timeout : 300 });
+          timeout : 500 });
   $('a.resource-url-analytics').click(function (e){
     var url = $(e.target).closest('a').attr('href');
     $.ajax({url : $('body').data('site-root') + '_tracking',
@@ -106,7 +106,7 @@ $(function (){
             },
             type : 'POST',
             complete : function () {location.href = url;},
-            timeout : 30});
+            timeout : 500});
     e.preventDefault();
   });
 });
