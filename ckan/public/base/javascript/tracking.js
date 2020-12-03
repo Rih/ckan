@@ -51,7 +51,7 @@ function renderOptions(list, selector){
 
 }
 
-function submitTracking(){
+function bindSubmitTracking(){
   $("#user_tracker").on("submit", function(event){
     event.preventDefault();
     var gender = $(event.target).find('select[name=gender]').val();
@@ -74,7 +74,10 @@ $(function (){
 
   renderOptions(USER_TYPES, "#usertype");
   renderOptions(GENDER_OPTIONS, "#gender");
-  submitTracking();
+  bindSubmitTracking();
+  if(!$('body').data('usertype') || !$('body').data('gender')){
+    $("#modal_tracking").modal('show');
+  }
   // Tracking
   var url = location.pathname;
   // remove any site root from url
