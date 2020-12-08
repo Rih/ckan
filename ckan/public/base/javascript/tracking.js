@@ -100,13 +100,13 @@ $(function (){
     $.ajax({url : $('body').data('site-root') + '_tracking',
             data : {
               url:url,
-              protype:'resource',
+              type:'resource',
               usertype: $('body').data('usertype'),
               gender: $('body').data('gender'),
             },
             type : 'POST',
             complete : function () {location.href = url;},
-            timeout : 500});
+            timeout : 1500});
     e.preventDefault();
   });
 });
