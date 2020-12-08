@@ -5,4 +5,4 @@ apt-get install -y software-properties-common apt-utils locales locales-all \
 build-essential nginx
 
 # install uwsgi
-python -m pip install uwsgi
+# python -m pip install uwsgi

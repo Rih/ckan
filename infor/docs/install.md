@@ -52,8 +52,9 @@ cd infor/setup
 cp production.init production.ini
 cp preproduction.init preproduction.ini
 ```
+- editar tanto preproduction.init y production.init la variable site_url por el sitio publico SITE_URL del .env
 
-- linkear configuración de nginx en sites-enabled
+- linkear configuración de nginx en sites-enabled y editar el server_name con el nombre de site_url
 ```
 cd /etc/nginx/sites-enabled
 ln -s /<your_ckan_root_repository>/infor/setup/nginx/host/host_back host_back
@@ -67,7 +68,7 @@ Dentro del contenedor re-linkear archivo configuracion .ini y revisar si who.ini
 sh infor/bin/enter-dev-server.sh
 cd /etc/ckan
 ln -s /usr/lib/ckan/venv/src/ckan/ckan/config/who.ini who.ini (omitir si ya existe)
-cp production.init production.ini.bkp
+cp production.ini production.ini.bkp
 ln -sfn /etc/ckan/backup/setup/preproduction.ini production.ini
 exit
 ```
@@ -78,8 +79,9 @@ exit
 sh infor/bin/enter-dev-server.sh
 ckan -c /etc/ckan/production.ini sysadmin add <username> email=<email> name=<name>
 ```
-* Ingresar a CKAN en navegador con <name> y contraseña recientemente ingresada
-
+- Reiniciar contenedores ```sh infor/bin/reload-ckan.sh```
+- Ingresar a CKAN en navegador con <name> y contraseña recientemente ingresada
+- Modificar Configuración general del sitio en /ckan-admin/config
 
  ### Instalar plugins
 * Primero cambiar permisos de ejecución
@@ -100,9 +102,6 @@ ln -sfn /etc/ckan/backup/setup/production.ini production.ini
 exit
 ```
 
-reiniciar ckan
-```sh infor/bin/reload-ckan.sh ```
-
 ## Ejecutar script .SQL dentro de DB
 - Entrar al esquema datastore con aplicacion BD a gusto: ej: DBeaver
 - host: URL de SITE_URL"
@@ -111,3 +110,8 @@ reiniciar ckan
 - contraseña: ckan
 - Ejecutar script
 ```infor/setup/datastore_permissions.sql```
+
+reiniciar ckan
+```sh infor/bin/reload-ckan.sh ```
+
+
