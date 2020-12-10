@@ -132,13 +132,17 @@
                 <div class="form-select form-group">
                   <label for="gender">Genero</label>
                   <select class="form-control" id="gender" name="gender">
-                    {{ h.user_tracks_options(keyword='gender') }}
+                    {% for opt in h.user_tracks_options(keyword='gender') %}
+                      <option value="{{opt.id}}">{{ opt.name }}</option>
+                    {% endfor %}
                   </select>
                 </div>
                 <div class="form-select form-group">
                   <label for="usertype">Tipo usuario</label>
                   <select class="form-control" id="usertype" name="usertype">
-                    {{ h.user_tracks_options(keyword='usertype') }}
+                    {% for opt in h.user_tracks_options(keyword='usertype') %}
+                      <option value="{{opt.id}}">{{ opt.name }}</option>
+                    {% endfor %}
                   </select>
                 </div>
               </div>

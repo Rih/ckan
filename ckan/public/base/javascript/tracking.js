@@ -1,55 +1,3 @@
-var USER_TYPES = [
-  {
-    id: 'academic',
-    nombre: 'Académico',
-  },
-  {
-    id: 'student',
-    nombre: 'Estudiante',
-  },
-  {
-    id: 'propietary',
-    nombre: 'Pequeño Propietario',
-  },
-  {
-    id: 'pyme',
-    nombre: 'Pyme',
-  },
-  {
-    id: 'company',
-    nombre: 'Gran Empresa',
-  },
-  {
-    id: 'ong',
-    nombre: 'ONG',
-  },
-  {
-    id: 'organization',
-    nombre: 'Organización o asociación',
-  },
-  {
-    id: 'other',
-    nombre: 'Otros usuarios',
-  }
-];
-
-var GENDER_OPTIONS = [
-  {
-    id: 'female',
-    nombre: 'Femenino',
-  },
-  {
-    id: 'male',
-    nombre: 'Masculino',
-  }
-];
-function renderOptions(list, selector){
-  $(selector).html('');
-  list.map(function(opt){
-    $(selector).append('<option value="'+opt.id+'">'+opt.nombre+'</option>');
-  });
-
-}
 
 function bindSubmitTracking(){
   $("#user_tracker").on("submit", function(event){
@@ -71,9 +19,6 @@ function bindSubmitTracking(){
 
 $(function (){
 
-
-  //renderOptions(USER_TYPES, "#usertype");
-  //renderOptions(GENDER_OPTIONS, "#gender");
   bindSubmitTracking();
   if(!$('body').data('usertype') || !$('body').data('gender')){
     $("#modal_tracking").modal('show');

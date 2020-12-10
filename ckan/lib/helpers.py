@@ -380,18 +380,9 @@ def user_tracks_options(*args, **kw):
         values.split(';'),
         names.split(';')
     )]
-    print(values)
-    print(names)
-    print(values.split(';'))
-    print(names.split(';'))
-    result_text = ''
     if len(result) == 0:
-        return '<option value="no_data">Indefinido</option>'
-    for opt in result:
-        result_text += '<option value="{}">{}</option>'.format(
-            opt['id'], opt['name'],
-        )
-    return result_text
+        return [{'id': "no_data", "name": "Seleccione"}]
+    return result
 
 
 def _url_for_flask(*args, **kw):
