@@ -132,11 +132,13 @@
                 <div class="form-select form-group">
                   <label for="gender">Genero</label>
                   <select class="form-control" id="gender" name="gender">
+                    {{ h.user_tracks_options(keyword='gender') }}
                   </select>
                 </div>
                 <div class="form-select form-group">
                   <label for="usertype">Tipo usuario</label>
                   <select class="form-control" id="usertype" name="usertype">
+                    {{ h.user_tracks_options(keyword='usertype') }}
                   </select>
                 </div>
               </div>

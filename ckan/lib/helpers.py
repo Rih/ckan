@@ -48,7 +48,7 @@ import ckan.plugins as p
 import ckan
 
 from ckan.lib.pagination import Page
-from ckan.common import _, ungettext, c, g, request, session, json
+from ckan.common import _, ungettext, c, g, config, request, session, json
 from ckan.lib.webassets_tools import include_asset, render_assets
 from markupsafe import Markup, escape
 
@@ -369,6 +369,21 @@ def url_for(*args, **kw):
 
     # Rewrite the URL to take the locale and root_path into account
     return _local_url(my_url, locale=locale, **kw)
+
+@core_helper
+def user_tracks_options(*args, **kw):
+    values = config.get(u'ckan.user.'+kw['keyword']+'.values', [])
+    names = config.get(u'ckan.user.'+kw['keyword']+'.names', [])
+    result = [{'id': x, 'name': y} for x, y in zip(values, names)]
+    #return json.dumps(result)
+    result_text = ''
+    if len(result) == 0:
+        return '<option value="no_data">Indefinido</option>'
+    for opt in result:
+        result_text += '<option value="{}">{}</option>'.format(
+            opt['id'], opt['name'],
+        )
+    return result_text
 
 
 def _url_for_flask(*args, **kw):

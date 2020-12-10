@@ -140,6 +140,11 @@ ckan.preview.direct = png jpg gif
 ckan.preview.loadable = html htm rdf+xml owl+xml xml n3 n-triples turtle plain atom csv tsv rss txt json
 ckan.display_timezone = server
 
+ckan.user.usertype.values = academic;student;propietary;pyme;company;ong;organization;other
+ckan.user.usertype.names = Académico;Estudiante;Pequeño Propietario;Pyme;Gran Empresa;ONG;Organización o asociación;Otros usuarios
+ckan.user.gender.values = female;male
+ckan.user.gender.names = Femenino;Masculino
+
 # package_hide_extras = for_search_index_only
 #package_edit_return_url = http://another.frontend/dataset/<NAME>
 #package_new_return_url = http://another.frontend/dataset/<NAME>
@@ -150,7 +155,7 @@ ckan.display_timezone = server
 
 
 ## Internationalisation Settings
-ckan.locale_default = en
+ckan.locale_default = es
 ckan.locale_order = en pt_BR ja it cs_CZ ca es fr el sv sr sr@latin no sk fi ru de pl nl bg ko_KR hu sa sl lv
 ckan.locales_offered =
 ckan.locales_filtered_out = en_GB

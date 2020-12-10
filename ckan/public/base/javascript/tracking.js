@@ -72,8 +72,8 @@ function bindSubmitTracking(){
 $(function (){
 
 
-  renderOptions(USER_TYPES, "#usertype");
-  renderOptions(GENDER_OPTIONS, "#gender");
+  //renderOptions(USER_TYPES, "#usertype");
+  //renderOptions(GENDER_OPTIONS, "#gender");
   bindSubmitTracking();
   if(!$('body').data('usertype') || !$('body').data('gender')){
     $("#modal_tracking").modal('show');
