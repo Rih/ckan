@@ -11,6 +11,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - changes
 
+## [ifn_tracking] - 2020-11-26
+### Added
+
+
+### Changed
+- Se quita Flujo de actividad
+- Se configura opciones de estadisticas de uso en production.ini
+    - nuevas variables modificables como una lista separadas por ;
+    - donde values son los valores a guardar, y names son lo que se muestra en pantalla
+```
+ckan.user.usertype.values =
+ckan.user.usertype.names =
+ckan.user.gender.values =
+ckan.user.gender.names =
+```
 
 ## [ifn_stats] - 2020-11-26
 ### Added

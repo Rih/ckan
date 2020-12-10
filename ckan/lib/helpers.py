@@ -374,7 +374,10 @@ def url_for(*args, **kw):
 def user_tracks_options(*args, **kw):
     values = config.get(u'ckan.user.'+kw['keyword']+'.values', [])
     names = config.get(u'ckan.user.'+kw['keyword']+'.names', [])
-    result = [{'id': x, 'name': y} for x, y in zip(values, names)]
+    result = [{'id': x, 'name': y} for x, y in zip(
+        values.split(';'),
+        names.split(';')
+    )]
     #return json.dumps(result)
     result_text = ''
     if len(result) == 0:
