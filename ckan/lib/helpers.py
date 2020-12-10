@@ -48,7 +48,7 @@ import ckan.plugins as p
 import ckan
 
 from ckan.lib.pagination import Page
-from ckan.common import _, ungettext, c, g, config, request, session, json
+from ckan.common import _, ungettext, c, g, request, session, json
 from ckan.lib.webassets_tools import include_asset, render_assets
 from markupsafe import Markup, escape
 
@@ -370,15 +370,20 @@ def url_for(*args, **kw):
     # Rewrite the URL to take the locale and root_path into account
     return _local_url(my_url, locale=locale, **kw)
 
+
 @core_helper
 def user_tracks_options(*args, **kw):
-    values = config.get(u'ckan.user.'+kw['keyword']+'.values', [])
-    names = config.get(u'ckan.user.'+kw['keyword']+'.names', [])
-    result = [{'id': x, 'name': y} for x, y in zip(
+    key = kw.get('keyword', 'usertype')
+    values = config.get('ckan.user.' + key + '.values', 'v1;v2')
+    names = config.get('ckan.user.' + key + '.names', 'n1;n2')
+    result = [{'id': x, 'name': y.encode('utf-8')} for x, y in zip(
         values.split(';'),
         names.split(';')
     )]
-    #return json.dumps(result)
+    print(values)
+    print(names)
+    print(values.split(';'))
+    print(names.split(';'))
     result_text = ''
     if len(result) == 0:
         return '<option value="no_data">Indefinido</option>'
