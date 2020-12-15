@@ -104,14 +104,31 @@ exit
 
 ## Ejecutar script .SQL dentro de DB
 - Entrar al esquema datastore con aplicacion BD a gusto: ej: DBeaver
-- host: URL de SITE_URL"
+- host: URL de SITE_URL
 - database: datastore
 - usuario: ckan
 - contraseña: ckan
-- Ejecutar script
+- Ejecutar scripts
 ```infor/setup/datastore_permissions.sql```
+
+- Entrar al esquema ckan con aplicacion BD a gusto: ej: DBeaver
+- host: URL de SITE_URL
+- database: ckan
+- usuario: ckan
+- contraseña: ckan
+- Ejecutar scripts
+```infor/setup/tracking_raw_trigger.sql```
+```infor/setup/tracking_raw_functions.sql```
 
 reiniciar ckan
 ```sh infor/bin/reload-ckan.sh ```
 
 
+## Para definir latitud/longitud por defecto en datos geoespaciales en mapa
+- modificar archivo: ckanext/reclineview/theme/public/vendor/recline/recline.js
+- Actualmente los campos detectados con case-insentive:
+```
+  latitudeFieldNames: ['lat','latitude', 'latitud', 'coord_lat', 'coord_latitud'],
+  longitudeFieldNames: ['lon','longitude', 'longitud', 'coord_long', 'coord_longitud'],
+  geometryFieldNames: ['geojson', 'geom','the_geom','geometry','spatial','location', 'geo', 'lonlat'],
+```

@@ -1881,8 +1881,8 @@ my.Map = Backbone.View.extend({
 
   // These are the default (case-insensitive) names of field that are used if found.
   // If not found, the user will need to define the fields via the editor.
-  latitudeFieldNames: ['lat','latitude'],
-  longitudeFieldNames: ['lon','longitude'],
+  latitudeFieldNames: ['lat','latitude', 'latitud', 'coord_lat', 'coord_latitud'],
+  longitudeFieldNames: ['lon','longitude', 'longitud', 'coord_long', 'coord_longitud'],
   geometryFieldNames: ['geojson', 'geom','the_geom','geometry','spatial','location', 'geo', 'lonlat'],
 
   initialize: function(options) {

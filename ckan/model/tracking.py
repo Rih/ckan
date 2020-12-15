@@ -13,6 +13,8 @@ tracking_raw_table = Table('tracking_raw', meta.metadata,
         Column('tracking_type', types.Unicode(10), nullable=False),
         Column('gender', types.Unicode(50), nullable=True),
         Column('usertype', types.Unicode(50), nullable=True),
+        Column('resource_id', types.UnicodeText, nullable=True),
+        Column('package_id', types.UnicodeText, nullable=True),
         Column('access_timestamp', types.DateTime),
     )
 

@@ -25,6 +25,8 @@ def upgrade():
         sa.Column('tracking_type', sa.String(10), nullable=False),
         sa.Column('gender', sa.String(50), nullable=True),
         sa.Column('usertype', sa.String(50), nullable=True),
+        sa.Column('resource_id', sa.UnicodeText, nullable=True),
+        sa.Column('package_id', sa.UnicodeText, nullable=True),
         sa.Column(
             'access_timestamp',
             sa.TIMESTAMP,
@@ -33,6 +35,8 @@ def upgrade():
     )
     op.create_index('tracking_raw_url', 'tracking_raw', ['url'])
     op.create_index('tracking_raw_user_key', 'tracking_raw', ['user_key'])
+    op.create_index('tracking_raw_resource_id', 'tracking_raw', ['resource_id'])
+    op.create_index('tracking_raw_package_id', 'tracking_raw', ['package_id'])
     op.create_index(
         'tracking_raw_access_timestamp', 'tracking_raw', ['access_timestamp']
     )
