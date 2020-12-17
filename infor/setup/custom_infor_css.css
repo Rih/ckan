@@ -1,0 +1,27 @@
+
+.account-masthead .account ul li {
+  border-left: 1px solid #1d602b;
+}
+
+.account-masthead .account ul li a:hover {
+  background-color: #0067ff
+}
+
+.account-masthead{
+  background: #0077bb;
+}
+
+.masthead{
+  background: #0067a2;
+}
+.site-footer{
+  background: #0067a2;
+}
+
+.account-masthead .account .notifications a span.badge {
+ background-color: #0067ff
+}
+
+.masthead .navigation .nav-pills li a:hover, .masthead .navigation .nav-pills li a:focus, .masthead .navigation .nav-pills li.active a {
+  background-color: #0067ff
+}

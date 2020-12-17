@@ -4,14 +4,17 @@ This script set the fields when a new resource is visited or downloaded in ckan.
 
 -- ALL RECORDS BETWEEN DATES
 SELECT
-    LPAD(cast(EXTRACT(day FROM traw.access_timestamp) as TEXT), 2, '0')||'-'||LPAD(cast(EXTRACT(month FROM traw.access_timestamp) as TEXT), 2, '0')||'-'||LPAD(cast(EXTRACT(year FROM traw.access_timestamp) as TEXT), 4, '0') as row_date,
-    res.url as resource_name,
-    res.id as resource_id,
-    pkg.id as package_id,
-    pkg.name as package_name,
-    traw.url,
-    convert_tracking_user_values('gender', traw.gender) as gender,
-    convert_tracking_user_values('usertype', traw.usertype) as usertype
+    LPAD(cast(EXTRACT(day FROM traw.access_timestamp) as TEXT), 2, '0')||'-'||
+    LPAD(cast(EXTRACT(month FROM traw.access_timestamp) as TEXT), 2, '0')||'-'||
+    LPAD(cast(EXTRACT(year FROM traw.access_timestamp) as TEXT), 4, '0') as "Fecha",
+    res.url as "Recurso",
+    res.id as "ID recurso",
+    pkg.id as "ID dataset",
+    pkg.name as "Dataset",
+    traw.url as "URL",
+    convert_tracking_user_values('gender', traw.gender) as "Género",
+    convert_tracking_user_values('usertype', traw.usertype) as "Tipo usuario",
+    (CASE  WHEN traw.tracking_type = 'resource' THEN 'Descarga' ELSE 'Visita' END) as "Tipo"
     FROM tracking_raw traw
 LEFT JOIN package pkg
     ON (
