@@ -77,7 +77,11 @@ from ckan.model.resource_view import (
 from ckan.model.tracking import (
     tracking_summary_table,
     TrackingSummary,
-    tracking_raw_table
+    tracking_raw_table,
+    Usertype,
+    usertype_table,
+    Gender,
+    gender_table,
 )
 from ckan.model.rating import (
     Rating,

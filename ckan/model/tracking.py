@@ -125,8 +125,4 @@ class Gender(core.StatefulObjectMixin,
         return q.order_by(cls.name)
 
 
-meta.mapper(Usertype, usertype_table)
-
-meta.mapper(Gender, gender_table)
-
 meta.mapper(TrackingSummary, tracking_summary_table)
