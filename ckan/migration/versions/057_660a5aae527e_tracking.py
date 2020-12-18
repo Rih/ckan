@@ -62,7 +62,28 @@ def upgrade():
         'tracking_summary_date', 'tracking_summary', ['tracking_date']
     )
 
+    op.create_table(
+        'usertype',
+        sa.Column('id', sa.Integer, primary_key=True, nullable=False),
+        sa.Column('name', sa.String(10), nullable=False, unique=True),
+        sa.Column('value', sa.UnicodeText, nullable=False),
+        sa.Column('state', sa.UnicodeText, nullable=False, server_default='active')
+    )
+
+    op.create_index('usertype_name', 'usertype', ['name'])
+
+    op.create_table(
+        'gender',
+        sa.Column('id', sa.Integer, primary_key=True, nullable=False),
+        sa.Column('name', sa.String(20), nullable=False, unique=True),
+        sa.Column('value', sa.UnicodeText, nullable=False),
+        sa.Column('state', sa.UnicodeText, nullable=False, server_default='active')
+    )
+
+    op.create_index('gender_name', 'usertype', ['name'])
 
 def downgrade():
     op.drop_table('tracking_summary')
     op.drop_table('tracking_raw')
+    op.drop_table('usertype')
+    op.drop_table('gender')

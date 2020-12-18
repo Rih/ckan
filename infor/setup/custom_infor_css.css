@@ -25,3 +25,25 @@
 .masthead .navigation .nav-pills li a:hover, .masthead .navigation .nav-pills li a:focus, .masthead .navigation .nav-pills li.active a {
   background-color: #0067ff
 }
+
+.homepage .module-search .module-content {
+    border-radius: 3px 3px 0 0;
+    background-color: #0077bb;
+    border-bottom: none;
+}
+
+.homepage .module-search .tags {
+    padding: 5px 10px 10px 10px;
+    background-color: #0067a2;
+    border-radius: 0 0 3px 3px;
+}
+
+@media (min-width: 768px){
+  .hero {
+      background: white;
+  }
+}
+
+body {
+  background: #2F9B45;
+}

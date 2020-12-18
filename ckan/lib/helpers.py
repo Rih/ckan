@@ -376,6 +376,10 @@ def user_tracks_options(*args, **kw):
     key = kw.get('keyword', 'usertype')
     values = config.get('ckan.user.' + key + '.values', 'v1;v2')
     names = config.get('ckan.user.' + key + '.names', 'n1;n2')
+    usertype_model = model.Usertype.all()
+    gender_model = model.Gender.all()
+    print(usertype_model)
+    print(gender_model)
     result = [{'id': x, 'name': y.encode('utf-8')} for x, y in zip(
         values.split(';'),
         names.split(';')

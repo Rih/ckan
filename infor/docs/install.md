@@ -128,7 +128,7 @@ reiniciar ckan
 - modificar archivo: ckanext/reclineview/theme/public/vendor/recline/recline.js
 - Actualmente los campos detectados con case-insentive:
 ```
-  latitudeFieldNames: ['lat','latitude', 'latitud', 'coord_lat', 'coord_latitud'],
-  longitudeFieldNames: ['lon','longitude', 'longitud', 'coord_long', 'coord_longitud'],
+  latitudeFieldNames: ['lat','latitude', 'latitud', 'coord_lat', 'coord_latitud', 'y'],
+  longitudeFieldNames: ['lon','longitude', 'longitud', 'coord_long', 'coord_longitud', 'x'],
   geometryFieldNames: ['geojson', 'geom','the_geom','geometry','spatial','location', 'geo', 'lonlat'],
 ```

@@ -3,9 +3,18 @@
 from sqlalchemy import types, Column, Table, text
 
 from ckan.model import meta
+from ckan.model import core
 from ckan.model import domain_object
 
-__all__ = ['tracking_summary_table', 'TrackingSummary', 'tracking_raw_table']
+__all__ = [
+    'tracking_summary_table',
+    'TrackingSummary',
+    'tracking_raw_table',
+    'usertype_table',
+    'Usertype',
+    'gender_table',
+    'Gender',
+]
 
 tracking_raw_table = Table('tracking_raw', meta.metadata,
         Column('user_key', types.Unicode(100), nullable=False),
@@ -18,6 +27,19 @@ tracking_raw_table = Table('tracking_raw', meta.metadata,
         Column('access_timestamp', types.DateTime),
     )
 
+usertype_table = Table('usertype', meta.metadata,
+        Column('id', types.Integer, nullable=False),
+        Column('name', types.Unicode(20), nullable=False),
+        Column('value', types.UnicodeText, nullable=True),
+        Column('state', types.UnicodeText, nullable=True, default='active')
+    )
+
+gender_table = Table('gender', meta.metadata,
+        Column('id', types.Integer, nullable=False),
+        Column('name', types.Unicode(20), nullable=False),
+        Column('value', types.UnicodeText, nullable=True),
+        Column('state', types.UnicodeText, nullable=True, default='active')
+    )
 
 tracking_summary_table = Table('tracking_summary', meta.metadata,
         Column('url', types.UnicodeText, primary_key=True, nullable=False),
@@ -29,6 +51,7 @@ tracking_summary_table = Table('tracking_summary', meta.metadata,
         Column('tracking_date', types.DateTime),
     )
 
+
 class TrackingSummary(domain_object.DomainObject):
 
     @classmethod
@@ -37,10 +60,10 @@ class TrackingSummary(domain_object.DomainObject):
         obj = obj.filter_by(package_id=package_id)
         if meta.Session.query(obj.exists()).scalar():
             data = obj.order_by(text('tracking_date desc')).first()
-            return {'total' : data.running_total,
+            return {'total': data.running_total,
                     'recent': data.recent_views}
 
-        return {'total' : 0, 'recent' : 0}
+        return {'total': 0, 'recent': 0}
 
 
     @classmethod
@@ -51,6 +74,59 @@ class TrackingSummary(domain_object.DomainObject):
             return {'total' : data.running_total,
                     'recent': data.recent_views}
 
-        return {'total' : 0, 'recent' : 0}
+        return {'total': 0, 'recent': 0}
+
+
+class Usertype(core.StatefulObjectMixin,
+            domain_object.DomainObject):
+
+    def __init__(self, name=u'', value=u'', state='active'):
+        self.name = name
+        self.value = value
+        self.state = state
+
+    @property
+    def display_name(self):
+        return self.name
+
+    @classmethod
+    def all(cls, state=('active',)):
+        """
+        Returns all groups.
+        """
+        q = meta.Session.query(cls)
+        if state:
+            q = q.filter(cls.state.in_(state))
+
+        return q.order_by(cls.name)
+
+
+class Gender(core.StatefulObjectMixin,
+            domain_object.DomainObject):
+
+    def __init__(self, name=u'', value=u'', state='active'):
+        self.name = name
+        self.value = value
+        self.state = state
+
+    @property
+    def display_name(self):
+        return self.name
+
+    @classmethod
+    def all(cls, state=('state',)):
+        """
+        Returns all groups.
+        """
+        q = meta.Session.query(cls)
+        if state:
+            q = q.filter(cls.state.in_(state))
+
+        return q.order_by(cls.name)
+
+
+meta.mapper(Usertype, usertype_table)
+
+meta.mapper(Gender, gender_table)
 
 meta.mapper(TrackingSummary, tracking_summary_table)
