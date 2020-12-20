@@ -77,10 +77,9 @@ class TrackingSummary(domain_object.DomainObject):
         return {'total': 0, 'recent': 0}
 
 
-class Usertype(core.StatefulObjectMixin,
-            domain_object.DomainObject):
+class Usertype(domain_object.DomainObject):
 
-    def __init__(self, name=u'', value=u'', state='active'):
+    def __init__(self, name=u'', value=u'', state=u'active'):
         self.name = name
         self.value = value
         self.state = state
@@ -92,19 +91,18 @@ class Usertype(core.StatefulObjectMixin,
     @classmethod
     def all(cls, state=('active',)):
         """
-        Returns all groups.
+        Returns all usertypes.
         """
-        q = meta.Session.query(cls)
+        q = meta.Session.query(cls).autoflush(False)
         if state:
             q = q.filter(cls.state.in_(state))
 
         return q.order_by(cls.name)
 
 
-class Gender(core.StatefulObjectMixin,
-            domain_object.DomainObject):
+class Gender(domain_object.DomainObject):
 
-    def __init__(self, name=u'', value=u'', state='active'):
+    def __init__(self, name=u'', value=u'', state=u'active'):
         self.name = name
         self.value = value
         self.state = state
@@ -116,9 +114,9 @@ class Gender(core.StatefulObjectMixin,
     @classmethod
     def all(cls, state=('state',)):
         """
-        Returns all groups.
+        Returns all gender.
         """
-        q = meta.Session.query(cls)
+        q = meta.Session.query(cls).autoflush(False)
         if state:
             q = q.filter(cls.state.in_(state))
 

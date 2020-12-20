@@ -20,8 +20,10 @@ services:
       - db
       - solr
       - redis
+
     depends_on:
       - db
+    tty: true
     ports:
       - "0.0.0.0:${CKAN_PORT}:5000"
     environment:
@@ -43,7 +45,7 @@ services:
       - ../../:/usr/lib/ckan/venv/src/ckan_tracked
       - ckan_storage:/var/lib/ckan
       - ../../infor:/etc/ckan/backup
-
+    # restart: always
   datapusher:
     container_name: datapusher
     image: clementmouchet/datapusher
