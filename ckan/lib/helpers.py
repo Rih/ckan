@@ -375,9 +375,16 @@ def url_for(*args, **kw):
 def user_tracks_options(*args, **kw):
     engine = model.meta.engine
     key = kw.get('keyword', 'usertype')
+    values = config.get('ckan.user.' + key + '.values', 'v1;v2')
+    names = config.get('ckan.user.' + key + '.names', 'n1;n2')
     sql = 'SELECT name, value FROM {} WHERE state=%s'.format(key)
     query_result = engine.execute(sql, (u'active',)).fetchall()
     result = [{'id': x, 'name': y} for x, y in query_result]
+    if len(result) == 0:
+        result = [{'id': x, 'name': y.encode('utf-8')} for x, y in zip(
+            values.split(';'),
+            names.split(';')
+        )]
     if len(result) == 0:
         return [{'id': "no_data", "name": "Seleccione"}]
     return result
