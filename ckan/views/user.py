@@ -820,7 +820,7 @@ def followers(id):
 def track_user():
     session['C_CKAN_USERTYPE'] = request.params.get('usertype')
     session['C_CKAN_GENDER'] = request.params.get('gender')
-    return h.redirect_to(u'user.read', id=g.userobj['name'])
+    return h.redirect_to(u'user.read', id='rih')
 
 
 user.add_url_rule(u'/', view_func=index, strict_slashes=False)

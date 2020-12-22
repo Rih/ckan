@@ -10,8 +10,9 @@ function bindSubmitTracking(){
         usertype: usertype,
         gender: gender
       }
-    }).then(function(resp){
+    }).done(function(resp){
       console.log(resp);
+      $("#modal_tracking").modal('show');
       window.location = '';
     });
   });
