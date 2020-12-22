@@ -29,14 +29,14 @@ tracking_raw_table = Table('tracking_raw', meta.metadata,
 
 usertype_table = Table('usertype', meta.metadata,
         Column('id', types.Integer, nullable=False),
-        Column('name', types.Unicode(20), nullable=False),
+        Column('name', types.Unicode(50), nullable=False),
         Column('value', types.UnicodeText, nullable=True),
         Column('state', types.UnicodeText, nullable=True, default='active')
     )
 
 gender_table = Table('gender', meta.metadata,
         Column('id', types.Integer, nullable=False),
-        Column('name', types.Unicode(20), nullable=False),
+        Column('name', types.Unicode(50), nullable=False),
         Column('value', types.UnicodeText, nullable=True),
         Column('state', types.UnicodeText, nullable=True, default='active')
     )

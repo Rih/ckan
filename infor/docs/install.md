@@ -8,21 +8,21 @@
 - nginx
 
 
+## Clonar repositorio git y cambiar de rama a ifn_tracking actualizada
+* git clone https://github.com/Rih/ckan.git
+* IMPORTANTE: cd ckan && git checkout ifn_tracking && git pull origin ifn_tracking
+
 
 * apt-get update &&
 apt-get install docker docker-compose vim nginx
 Si máquina HOST es linux:
-- ```chmod +x infor/bin/install-host.sh```
+- ```chmod +x infor/bin/installs-host.sh```
 - ```sh  infor/bin/installs-host.sh ```
 
 ## Habilitar puertos
 * 80, 5432, 9000 (opcional)
 * sudo ufw allow 80 80/tcp
 * sudo ufw allow 5432 5432/tcp
-
-## Clonar repositorio git y cambiar de rama a ifn_tracking actualizada
-* git clone https://github.com/Rih/ckan.git
-* IMPORTANTE: cd ckan && git checkout ifn_tracking && git pull origin ifn_tracking
 
 ## Instalar los contenedores de [CKAN](https://docs.ckan.org/en/2.9/maintaining/installing/install-from-docker-compose.html)
 #### Copiar .env
@@ -32,10 +32,12 @@ Si máquina HOST es linux:
 #### En maquina HOST Añadir a /etc/hosts dominio
 * 127.0.0.1 ckan
 
-#### En .env añadir o corregir CKAN_SITE_URL a url pública
+#### En .env
+- añadir o corregir CKAN_SITE_URL a url pública
+- indicar maximo tamaño archivo
 ```
 CKAN_SITE_URL=http://ckan:5000
-CKAN_MAX_UPLOAD_SIZE_MB=10
+CKAN_MAX_UPLOAD_SIZE_MB=100
 ```
 
 #### Instalar contenedores
@@ -60,8 +62,12 @@ cd /etc/nginx/sites-enabled
 ln -s /<your_ckan_root_repository>/infor/setup/nginx/host/host_back host_back
 cp preproduction.init preproduction.ini
 ```
-- editar host_back con el dominio público que se configuró en SITE_URL
-
+- editar host_back la variable server_name con el dominio público que se configuró en SITE_URL
+```
+    ...
+    server_name tusubdominio.tu_sitio.com;
+    ...
+```
 Dentro del contenedor re-linkear archivo configuracion .ini y revisar si who.ini ya esta linkeado
 
 ```
@@ -73,16 +79,28 @@ ln -sfn /etc/ckan/backup/setup/preproduction.ini production.ini
 exit
 ```
 
+### Crear locales
+```
+source /usr/lib/ckan/venv/bin/activate
+cd /usr/lib/ckan/venv/src/ckan
+python setup.py compile_catalog -f --locale es
+python setup.py compile_catalog -f --locale en
+python setup.py compile_catalog -f --locale en_GB
+python setup.py compile_catalog -f --locale en_AU
+```
 ### Crear un usuario sysadmin
 
 ```
 sh infor/bin/enter-dev-server.sh
 ckan -c /etc/ckan/production.ini sysadmin add <username> email=<email> name=<name>
+Crear el admin
+ckan -c /etc/ckan/production.ini sysadmin add admin email=<email> name=admin
 ```
 - Reiniciar contenedores ```sh infor/bin/reload-ckan.sh```
 - Ingresar a CKAN en navegador con <name> y contraseña recientemente ingresada
 - Modificar Configuración general del sitio en /ckan-admin/config
 
+- Copiar el CSS de infor/setup/custom_infor_css.css en /ckan-admin/config
  ### Instalar plugins
 * Primero cambiar permisos de ejecución
  ```chmod +x infor/bin/installs-plugin.sh```
@@ -117,6 +135,7 @@ exit
 - usuario: ckan
 - contraseña: ckan
 - Ejecutar scripts
+```infor/setup/usertype_gender.sql```
 ```infor/setup/tracking_raw_trigger.sql```
 ```infor/setup/tracking_raw_functions.sql```
 

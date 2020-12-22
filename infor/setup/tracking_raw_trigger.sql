@@ -27,12 +27,12 @@ AS $body$
         --    substring(NEW.url from '%dataset/#"([a-f0-9_\-]+)#"/%' for '#')
         --);
         NEW.package_id := (
-15            substring(NEW.url from '%dataset/#"([A-Za-z0-9_\-]+)#"/%' for '#')
+            substring(NEW.url from '%dataset/#"([A-Za-z0-9_\-]+)#"/%' for '#')
         );
         RETURN NEW;
     END;
 $body$ LANGUAGE plpgsql;
 ALTER FUNCTION populate_resource_package_ids_trigger() OWNER TO "ckan";
 
-CREATE OR REPLACE TRIGGER tracking_fill_resource_and_package_ids BEFORE INSERT ON tracking_raw
+CREATE TRIGGER tracking_fill_resource_and_package_ids BEFORE INSERT ON tracking_raw
 FOR EACH ROW EXECUTE PROCEDURE populate_resource_package_ids_trigger();

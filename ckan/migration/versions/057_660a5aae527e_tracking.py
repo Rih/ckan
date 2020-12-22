@@ -65,7 +65,7 @@ def upgrade():
     op.create_table(
         'usertype',
         sa.Column('id', sa.Integer, primary_key=True, nullable=False),
-        sa.Column('name', sa.String(10), nullable=False, unique=True),
+        sa.Column('name', sa.String(50), nullable=False, unique=True),
         sa.Column('value', sa.UnicodeText, nullable=False),
         sa.Column('state', sa.UnicodeText, nullable=False, server_default='active')
     )
@@ -75,7 +75,7 @@ def upgrade():
     op.create_table(
         'gender',
         sa.Column('id', sa.Integer, primary_key=True, nullable=False),
-        sa.Column('name', sa.String(20), nullable=False, unique=True),
+        sa.Column('name', sa.String(50), nullable=False, unique=True),
         sa.Column('value', sa.UnicodeText, nullable=False),
         sa.Column('state', sa.UnicodeText, nullable=False, server_default='active')
     )
