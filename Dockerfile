@@ -53,11 +53,14 @@ ADD . $CKAN_VENV/src/ckan/
 RUN ckan-pip install -U pip && \
     ckan-pip install --upgrade --no-cache-dir -r $CKAN_VENV/src/ckan/requirement-setuptools.txt && \
     ckan-pip install --upgrade --no-cache-dir -r $CKAN_VENV/src/ckan/requirements-py2.txt && \
-    ckan-pip install -e $CKAN_VENV/src/ckan/ && \
-    ln -s $CKAN_VENV/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini && \
+    ckan-pip install -e $CKAN_VENV/src/ckan/
+RUN ln -s $CKAN_VENV/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini && \
     cp -v $CKAN_VENV/src/ckan/contrib/docker/ckan-entrypoint.sh /ckan-entrypoint.sh && \
     chmod +x /ckan-entrypoint.sh && \
     chown -R ckan:ckan $CKAN_HOME $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH
+
+RUN chmod -R 777 $CKAN_VENV/src/ckan/ckan
+RUN chmod -R 777 $CKAN_VENV/src/ckan/ckanext
 
 ENTRYPOINT ["/ckan-entrypoint.sh"]
 
@@ -65,3 +68,4 @@ USER ckan
 EXPOSE 5000
 
 CMD ["ckan","-c","/etc/ckan/production.ini", "run", "--host", "0.0.0.0"]
+CMD ["tail", "-f", "/etc/hosts"]

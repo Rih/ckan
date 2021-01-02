@@ -24,7 +24,14 @@ Si máquina HOST es linux:
 * sudo ufw allow 80 80/tcp
 * sudo ufw allow 5432 5432/tcp
 
+## Modificar permisos en directorios ckan y ckanext
+```
+chmod -R 777 <your_ckan_root_repository>/ckan
+chmod -R 777 <your_ckan_root_repository>/ckanext
+```
+
 ## Instalar los contenedores de [CKAN](https://docs.ckan.org/en/2.9/maintaining/installing/install-from-docker-compose.html)
+
 #### Copiar .env
 * cd ckan/contrib/docker/
 * cp .env.template .env

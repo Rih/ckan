@@ -42,8 +42,9 @@ services:
     volumes:
       - ckan_config:/etc/ckan
       - ckan_home:/usr/lib/ckan
-      - ../../:/usr/lib/ckan/venv/src/ckan_tracked
       - ckan_storage:/var/lib/ckan
+      - ../../ckan:/usr/lib/ckan/venv/src/ckan/ckan
+      - ../../ckanext:/usr/lib/ckan/venv/src/ckan/ckanext
       - ../../infor:/etc/ckan/backup
     # restart: always
   datapusher:
