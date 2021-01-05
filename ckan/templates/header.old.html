@@ -59,58 +59,50 @@
   </div>
 </div>
 {% endblock %}
-<header class="navbar-static-top masthead">
-  <nav class="navbar navbar-dark navbar-expand-xl navbar-lg shadow-none">
-    <div class="container">
-
-
-      <a class="navbar-brand" href="/">
-       {% block header_logo %} {% if g.site_logo %}
-        <a class="logo" href="{{ h.url_for('home.index') }}"><img src="{{ h.url_for_static_or_external(g.site_logo) }}" alt="{{ g.site_title }}" title="{{ g.site_title }}" /></a>
-        {% else %}
-        <h1>
-        <a href="{{ h.url_for('home.index') }}">{{ g.site_title }}</a>
-        </h1>
-        {% if g.site_description %}
-        <h2>{{ g.site_description }}</h2>{% endif %} {% endif %} {% endblock %}
-      </a>
-
-      <div class="collapse navbar-collapse" id="navbarDatos">
-        <ul class="navbar-nav ml-auto">
-
-          <li class=" ">
-            <a class="nav-link " href="/dataset">
-              {{ _('Datasets') }}
-
-            </a>
-          </li>
-
-          <li class=" ">
-            <a class="nav-link " href="/organization">
-              {{ _('Organizations') }}
-            </a>
-          </li>
-
-          <li class=" ">
-            <a class="nav-link " href="/group">
-              {{ _('Groups') }}
-            </a>
-          </li>
-
-          <li class=" ">
-            <a class="nav-link " href="/about">
-              {{ _('About') }}
-            </a>
-          </li>
-          <li class=" ml-3">
-            <button class="btn btn-block btn-primary datos-btn">
-              {% link_for _('Log in'), named_route='user.login' %}
-            </button>
-          </li>
-        </ul>
-      </div>
-
+<header class="navbar navbar-static-top masthead">
+  {% block header_debug %} {% if g.debug and not g.debug_supress_header %}
+  <div class="debug">Controller : {{ c.controller }}<br/>Action : {{ c.action }}</div>
+  {% endif %} {% endblock %}
+  <div class="container">
+    <div class="navbar-right">
+      <button data-target="#main-navigation-toggle" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+        <span class="fa fa-bars"></span>
+      </button>
     </div>
-  </nav>
+    <hgroup class="{{ g.header_class }} navbar-left">
+      {% block header_logo %} {% if g.site_logo %}
+      <a class="logo" href="{{ h.url_for('home.index') }}"><img src="{{ h.url_for_static_or_external(g.site_logo) }}" alt="{{ g.site_title }}" title="{{ g.site_title }}" /></a>
+      {% else %}
+      <h1>
+        <a href="{{ h.url_for('home.index') }}">{{ g.site_title }}</a>
+      </h1>
+      {% if g.site_description %}
+      <h2>{{ g.site_description }}</h2>{% endif %} {% endif %} {% endblock %}
+    </hgroup>
+
+    <div class="collapse navbar-collapse" id="main-navigation-toggle">
+      {% block header_site_navigation %}
+      <nav class="section navigation">
+        <ul class="nav nav-pills">
+            {% block header_site_navigation_tabs %}
+		{{ h.build_nav_main(
+		    ('dataset.search', _('Datasets')),
+		    ('organization.index', _('Organizations')),
+		    ('group.index', _('Groups')),
+		    ('home.about', _('About')) ) }}
+	    {% endblock %}
+        </ul>
+      </nav>
+      {% endblock %} {% block header_site_search %}
+      <form class="section site-search simple-input" action="{% url_for 'dataset.search' %}" method="get">
+        <div class="field">
+          <label for="field-sitewide-search">{% block header_site_search_label %}{{ _('Search Datasets') }}{% endblock %}</label>
+          <input id="field-sitewide-search" type="text" class="form-control" name="q" placeholder="{{ _('Search') }}" aria-label="{{ _('Search datasets') }}"/>
+          <button class="btn-search" type="submit" aria-label="{{ _('Submit') }}"><i class="fa fa-search"></i></button>
+        </div>
+      </form>
+      {% endblock %}
+    </div>
+  </div>
 </header>
 {% endblock %}

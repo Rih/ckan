@@ -1,0 +1,31 @@
+{% set tags = h.get_facet_items_dict('tags', c.search_facets, limit=3) %}
+{% set placeholder = _('E.g. environment') %}
+
+<h1 class="h2 text-white mb-3 datos-line-height-1">
+  Datos.gob el repositorio de datos abiertos centralizado del Estado.
+</h1>
+<p class="text-white mb-4">
+  En este portal encontrarás datos y estadísticas del sector público,
+  para distintos fines, como aplicaciones, visualizaciones,
+  investigación, etc.
+</p>
+<form class="search mw-200 mb-3" method="get" action="{% url_for 'dataset.search' %}">
+  <input aria-label="{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}"
+         type="text" class="form-control" name="q" value="" autocomplete="off"
+         {% block search_placeholder %}{{ placeholder }}{% endblock %}
+         placeholder="¿Qué datos necesitas?"
+  >
+  <div class="search-action">
+     <button type="submit" class="btn btn-outline-search" aria-label="Buscar">
+     <i class="fa fa-search" aria-hidden="true"></i>
+     </button>
+  </div>
+</form>
+<h3 class="text-white">{{ _('Popular tags') }}</h3>
+<p class="text-white text-center">
+{% for tag in tags %}
+<a class="ml-4 text-white" href="{% url_for 'dataset.search', tags=tag.name %}">
+  {{ h.truncate(tag.display_name, 22) }}
+</a>
+{% endfor %}
+</p>

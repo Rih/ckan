@@ -11,7 +11,7 @@ Warning: Uncomment DROP/CREATE TABLE lines if you know what are you doing!
 --  id SERIAL PRIMARY KEY,
 --  name VARCHAR(20) UNIQUE,
 --  value TEXT,
---  enable INT DEFAULT 1
+--  state TEXT DEFAULT 'active'
 --);
 --COMMIT;
 INSERT INTO public."gender" (id, name, value) VALUES (1, 'female', 'Femenino');
@@ -25,7 +25,7 @@ INSERT INTO public."gender" (id, name, value) VALUES (2, 'male', 'Masculino');
 --  id SERIAL PRIMARY KEY,
 --  name VARCHAR(20) UNIQUE,
 --  value TEXT,
---  enable INT DEFAULT 1
+--  state TEXT DEFAULT 'active'
 --);
 --COMMIT;
 

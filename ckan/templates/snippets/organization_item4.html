@@ -1,0 +1,25 @@
+{% set url=h.url_for(controller='organization', action='read', id=organization.name) %}
+{% set truncate=truncate or 0 %}
+{% block item %}
+<li class="col-md-4 mb-3 mb-md-5">
+   <a class="media text-normal black-link-hover" href="{{ url }}"
+      title="{{ _('View {organization_name}').format(organization_name=organization.display_name) }}"
+   >
+      <i class="fa fa-file cl-2x mr-2" aria-hidden="true"></i>
+      <div class="media-body text-underline">
+        {% block title %}
+          <h3 class="font-primary font-level-7 mb-0">{{ organization.display_name }}</h3>
+        {% endblock %}
+        {% block datasets %}
+         <p class="text-color-inherit mb-0">
+          {% if organization.package_count %}
+            <strong class="count">{{ ungettext('{num} Dataset', '{num} Datasets', organization.package_count).format(num=organization.package_count) }}</strong>
+          {% else %}
+            <span class="count">{{ _('0 Datasets') }}</span>
+          {% endif %}
+          </p>
+        {% endblock %}
+      </div>
+   </a>
+</li>
+{% endblock %}

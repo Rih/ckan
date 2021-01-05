@@ -1,0 +1,31 @@
+{% set stats = h.get_site_statistics() %}
+
+{% block stats_group %}
+  <a class="card-data text-normal bg-white" href="{{ h.url_for('dataset.search') }}">
+     <div class="card-data-title">
+        <div class="card-data-quantity">
+           {{ h.SI_number_span(stats.dataset_count) }}
+        </div>
+        <h5>{{ _('dataset') if stats.dataset_count == 1 else _('datasets') }}</h5>
+     </div>
+     <p>Cantidad de Datos cargados</p>
+  </a>
+  <a class="card-data text-normal bg-white" href="{{ h.url_for(controller='organization', action='index') }}">
+     <div class="card-data-title">
+        <div class="card-data-quantity">
+           {{ h.SI_number_span(stats.organization_count) }}
+        </div>
+        <h5>{{ _('organization') if stats.organization_count == 1 else _('organizations') }}</h5>
+     </div>
+     <p>Instituciones que participan</p>
+  </a>
+  <a class="card-data text-normal bg-white" href="{{ h.url_for(controller='group', action='index') }}">
+     <div class="card-data-title">
+        <div class="card-data-quantity">
+           {{ h.SI_number_span(stats.group_count) }}
+        </div>
+        <h5>{{ _('group') if stats.group_count == 1 else _('groups') }}</h5>
+     </div>
+     <p>Datos agrupados por categorías</p>
+  </a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% set url=h.url_for(controller='group', action='read', id=group.name) %}
+{% set truncate=truncate or 0 %}
+{% set truncate_title = truncate_title or 0 %}
+{% set title = group.title or group.name %}
+{% block group_item %}
+<li class="col-md-4 mb-3 mb-md-5">
+   <a class="media text-normal black-link-hover" href="{{ url }}"
+      title="{{ group.title or group.name }}"
+   >
+      <i class="fa fa-file cl-2x mr-2" aria-hidden="true"></i>
+      <div class="media-body text-underline">
+        {% block group_item_header_title %}
+          <h3 class="font-primary font-level-7 mb-0">{{ group.title or group.name }}</h3>
+        {% endblock %}
+      </div>
+     {% block group_item_content %}
+      {% set list_class = "list-unstyled dataset-list" %}
+      {% set item_class = "dataset-item module-content" %}
+      {% snippet 'snippets/package_list.html', packages=group.packages, list_class=list_class, item_class=item_class, truncate=120 %}
+    {% endblock %}
+   </a>
+</li>
+{% endblock %}
