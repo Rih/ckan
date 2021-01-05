@@ -51,6 +51,7 @@
     #}
     {% block links -%}
       <link rel="shortcut icon" href="{{ g.favicon }}" />
+
     {% endblock -%}
 
     {#
@@ -117,6 +118,7 @@
       {# defined in the config.ini under "ckan.template_footer_end" #}
       {{ g.template_footer_end | safe }}
     {%- endblock %}
+    {% if not request.path == '/' %}
     <div id="modal_tracking" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document" data-keyboard="false" data-backdrop="static">
         <div class="modal-content">
@@ -155,6 +157,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
     {# render all assets included in scripts block and everywhere else #}
     {# make sure there are no calls to `asset` tag after this point #}
     {{ h.render_assets('style') }}

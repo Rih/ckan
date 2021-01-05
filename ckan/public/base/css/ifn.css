@@ -2518,7 +2518,7 @@ fieldset:disabled a.collapsible-links-list-link {
 }
 .btn-primary:hover {
     color: #fff;
-    background-color: #00578d;
+    background-color: #35882f;
     border-color: #004f80;
 }
 .btn-primary.focus,
@@ -24338,7 +24338,7 @@ footer a {
     white-space: nowrap;
 }
 footer a:hover {
-    color: #006fb3;
+    color: white;
 }
 @media (min-width: 768px) {
     footer a {

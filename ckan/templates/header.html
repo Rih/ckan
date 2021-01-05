@@ -63,40 +63,44 @@
   <nav class="navbar navbar-dark navbar-expand-xl navbar-lg shadow-none">
     <div class="container">
 
-
-      <a class="navbar-brand" href="/">
-       {% block header_logo %} {% if g.site_logo %}
-        <a class="logo" href="{{ h.url_for('home.index') }}"><img src="{{ h.url_for_static_or_external(g.site_logo) }}" alt="{{ g.site_title }}" title="{{ g.site_title }}" /></a>
-        {% else %}
-        <h1>
-        <a href="{{ h.url_for('home.index') }}">{{ g.site_title }}</a>
-        </h1>
-        {% if g.site_description %}
-        <h2>{{ g.site_description }}</h2>{% endif %} {% endif %} {% endblock %}
-      </a>
+     {% block header_logo %} {% if g.site_logo %}
+      <a class="{% if request.path == '/' %}navbar-brand{% else %}logo{% endif %}" href="{{ h.url_for('home.index') }}"><img src="{{ h.url_for_static_or_external(g.site_logo) }}" alt="{{ g.site_title }}" title="{{ g.site_title }}" /></a>
+      {% else %}
+      <h1>
+      <a href="{{ h.url_for('home.index') }}">{{ g.site_title }}</a>
+      </h1>
+      {% if g.site_description %}
+      <h2>{{ g.site_description }}</h2>{% endif %} {% endif %} {% endblock %}
+      {% if request.path == '/' %}
+          <button class="navbar-toggler" type="button"
+              data-toggle="collapse"
+              data-target="#navbarDatos"
+              aria-controls="navbarDatos"
+              aria-expanded="true"
+              aria-label="Mostrar u ocultar navegación"
+            >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      {% endif %}
 
       <div class="collapse navbar-collapse" id="navbarDatos">
+        {% if request.path == '/' %}
         <ul class="navbar-nav ml-auto">
-
           <li class=" ">
             <a class="nav-link " href="/dataset">
               {{ _('Datasets') }}
-
             </a>
           </li>
-
           <li class=" ">
             <a class="nav-link " href="/organization">
               {{ _('Organizations') }}
             </a>
           </li>
-
           <li class=" ">
             <a class="nav-link " href="/group">
               {{ _('Groups') }}
             </a>
           </li>
-
           <li class=" ">
             <a class="nav-link " href="/about">
               {{ _('About') }}
@@ -108,6 +112,30 @@
             </button>
           </li>
         </ul>
+        {% else %}
+          {% block header_site_navigation %}
+            <nav class="section navigation">
+              <ul class="nav nav-pills">
+                  {% block header_site_navigation_tabs %}
+                    {{ h.build_nav_main(
+                        ('dataset.search', _('Datasets')),
+                        ('organization.index', _('Organizations')),
+                        ('group.index', _('Groups')),
+                        ('home.about', _('About')) ) }}
+                    {% endblock %}
+              </ul>
+            </nav>
+            {% endblock %}
+            {% block header_site_search %}
+            <form class="section site-search simple-input" action="{% url_for 'dataset.search' %}" method="get">
+              <div class="field">
+                <label for="field-sitewide-search">{% block header_site_search_label %}{{ _('Search Datasets') }}{% endblock %}</label>
+                <input id="field-sitewide-search" type="text" class="form-control" name="q" placeholder="{{ _('Search') }}" aria-label="{{ _('Search datasets') }}"/>
+                <button class="btn-search" type="submit" aria-label="{{ _('Submit') }}"><i class="fa fa-search"></i></button>
+              </div>
+            </form>
+            {% endblock %}
+        {% endif %}
       </div>
 
     </div>

@@ -2616,6 +2616,13 @@ def get_featured_organizations(count=1):
                               items=config_orgs)
     return orgs
 
+@core_helper
+def get_featured_datasets():
+    limit = 6
+    datasets = logic.get_action('package_search')({}, {
+        'sort': 'metadata_modified desc'
+    })
+    return datasets['results'][:limit]
 
 @core_helper
 def get_featured_groups(count=1):

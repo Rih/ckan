@@ -111,39 +111,18 @@
                Datos actualizados recientemente
             </h2>
          </header>
-
+              {% set truncate = truncate or 180 %}
+              {% set truncate_title = truncate_title or 80 %}
 
          <ol class="row list-unstyled mb-0">
-            <li class="col-md-4 mb-4 ">
-               <a class="black-link-hover" href="/dataset/registro-de-importacion-2020">
-               Registro de Importación 2020
-               </a>
-            </li>
-            <li class="col-md-4 mb-4 ">
-               <a class="black-link-hover" href="/dataset/registro-de-exportacion-2020">
-               Registro de Exportación 2020
-               </a>
-            </li>
-            <li class="col-md-4 mb-4 ">
-               <a class="black-link-hover" href="/dataset/33353">
-               Lugares de carga de tarjeta bip!_Retail
-               </a>
-            </li>
-            <li class="col-md-4 mb-4 mb-md-0">
-               <a class="black-link-hover" href="/dataset/28198">
-               Lugares de carga de tarjeta bip!_Puntos bip!
-               </a>
-            </li>
-            <li class="col-md-4 mb-4 mb-md-0">
-               <a class="black-link-hover" href="/dataset/28194">
-               Lugares de carga de tarjeta bip!_Centros bip! Estándar Normal
-               </a>
-            </li>
-            <li class="col-md-4  mb-md-0">
-               <a class="black-link-hover" href="/dataset/28192">
-               Lugares de carga de tarjeta bip!_Centros bip! Alto Estándar
-               </a>
-            </li>
+           {% for package in h.get_featured_datasets() %}
+               <li class="col-md-4 mb-4 ">
+                   <a class="black-link-hover" href="{{ h.url_for('%s.read' % package.type, id=package.name) }}">
+                     {% set title = package.title or package.name %}
+                      {{ h.truncate(title, truncate_title) }}
+                   </a>
+                </li>
+          {% endfor %}
          </ol>
       </div>
    </section>
