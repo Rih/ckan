@@ -59,8 +59,8 @@ RUN ln -s $CKAN_VENV/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini && \
     chmod +x /ckan-entrypoint.sh && \
     chown -R ckan:ckan $CKAN_HOME $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH
 
-# RUN chmod -R 777 $CKAN_VENV/src/ckan/ckan
-# RUN chmod -R 777 $CKAN_VENV/src/ckan/ckanext
+RUN chmod -R 777 $CKAN_VENV/src/ckan/ckan
+RUN chmod -R 777 $CKAN_VENV/src/ckan/ckanext
 
 ENTRYPOINT ["/ckan-entrypoint.sh"]
 

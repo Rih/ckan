@@ -69,8 +69,7 @@ services:
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "ckan"]
     ports:
-      - "5432:5432"
-      - "2222:22"
+      - "6543:5432"
   solr:
     container_name: solr
     build:
